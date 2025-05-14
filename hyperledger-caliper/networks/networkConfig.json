@@ -1,0 +1,27 @@
+{
+  "caliper": {
+      "blockchain": "ethereum",
+      "command" : {
+        "start": "", 
+        "end": ""
+    }
+  },
+  "ethereum": {
+      "url": "ws://127.0.0.1:8545",
+      "fromAddress": "0x0Ff4925570ce4Dd74D20d8C04685AE86c058275a",
+      "contractDeployerAddress": "0x0Ff4925570ce4Dd74D20d8C04685AE86c058275a",
+      "transactionConfirmationBlocks": 1,
+      "gasLimit": 8500000,
+      "contracts": {
+          "BenchmarkTest": {
+              "path": "/home/suzanaporto/hyperledger3/benchmark-test-eradne2025/eth-test/build/contracts/BenchmarkTest.json",
+              "estimateGas": true,
+              "address": "0x37e9cf01b9923dc59191501c15d3368c75b2069c",
+              "gas": {
+                  "sendData": 500000
+              },
+              "abi":  [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"address[]","name":"recipients","type":"address[]"}],"name":"BatchDataSent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"string","name":"message","type":"string"}],"name":"DataSent","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"receivedData","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"message","type":"string"},{"internalType":"address","name":"sender","type":"address"}],"stateMutability":"view","type":"function","constant":true},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_id","type":"uint256"},{"internalType":"string","name":"_message","type":"string"}],"name":"sendData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"_recipients","type":"address[]"},{"internalType":"uint256[]","name":"_ids","type":"uint256[]"},{"internalType":"string[]","name":"_messages","type":"string[]"}],"name":"sendBatchData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_owner","type":"address"}],"name":"getData","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"message","type":"string"},{"internalType":"address","name":"sender","type":"address"}],"internalType":"struct BenchmarkTest.Data","name":"","type":"tuple"}],"stateMutability":"view","type":"function","constant":true}] 
+          }
+      }
+  }
+}
