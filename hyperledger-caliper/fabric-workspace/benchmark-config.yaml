@@ -1,0 +1,37 @@
+test:
+  name: FabCar Benchmark Test
+  description: Caliper benchmark for Hyperledger Fabric FabCar example
+  workers:
+    type: local
+    number: 1
+
+  rounds:
+    - label: query
+      description: Query all cars
+      txNumber: 2
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 5
+      workload:
+        module: workloads/queryAllCars.js
+        arguments:
+          contractId: fabcar
+          channel: mychannel
+
+    # - label: create
+    #   description: Create a car
+    #   txDuration: 30
+    #   rateControl:
+    #     type: fixed-load
+    #     opts:
+    #       tps: 5
+    #   workload:
+    #     module: workloads/createCar.js
+    #     arguments:
+    #       contractId: fabcar
+    #       channel: mychannel
+
+  monitors:
+      transaction:
+      - module: logging

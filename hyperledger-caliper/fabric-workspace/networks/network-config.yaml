@@ -1,0 +1,40 @@
+version: "2.0.0"
+caliper:
+  blockchain: fabric
+
+channels:
+  - channelName: mychannel
+    contracts:
+      - id: fabcar
+    organizations:
+      - Org1
+      - Org2
+
+organizations:
+  - mspid: Org1MSP
+    identities:
+      certificates:
+      - name: Admin
+        admin: true
+        clientPrivateKey:
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/409b6e62ef1186ae59b17ccd51f988c0b063ef4ba5a7f8c182f409ecbdb65cf5_sk
+        clientSignedCert:
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+    connectionProfile:
+      path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.json
+      discover: true
+    name: Org1
+
+  - mspid: Org2MSP
+    identities:
+      certificates:
+      - name: Admin
+        admin: true
+        clientPrivateKey:
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/e81ee54f5a77427482defdc47fafd4a8bc2cac8dd0736a6ee9bdb61c8fe423ef_sk
+        clientSignedCert:
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
+    connectionProfile:
+      path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/connection-org2.json
+      discover: true
+    name: Org2
