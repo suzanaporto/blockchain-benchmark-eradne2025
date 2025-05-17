@@ -134,7 +134,7 @@
             <ul>
                 <h3>&nbspBenchmark results</h3>
                 <li><a href="#benchmarksummary">Summary</a></li>
-                    <li><a href="#sendData">sendData</a></li>
+                    <li><a href="#createPatientData">createPatientData</a></li>
             </ul>
             <ul>
                 <h3>&nbspSystem under test</h3>
@@ -152,28 +152,28 @@
                     </tr>
 
                     <tr>
-                         <td>sendData</td> <td>2</td> <td>0</td> <td>62.5</td> <td>0.14</td> <td>0.12</td> <td>0.13</td> <td>12.8</td>
+                         <td>createPatientData</td> <td>4</td> <td>0</td> <td>27.0</td> <td>0.06</td> <td>0.05</td> <td>0.05</td> <td>20.5</td>
                     </tr>
                 </table>
             </div>
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="sendData">
-                <h2>Benchmark round: sendData</h2>
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="createPatientData">
+                <h2>Benchmark round: createPatientData</h2>
                 <p>Sending transactions to the Ethereum network</p>
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
     tps: 10
 </pre>
-                        <h3>Performance metrics for sendData</h3>
+                        <h3>Performance metrics for createPatientData</h3>
                             <table style="min-width: 100%;">
                                 <tr>
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>sendData</td> <td>2</td> <td>0</td> <td>62.5</td> <td>0.14</td> <td>0.12</td> <td>0.13</td> <td>12.8</td>
+                                     <td>createPatientData</td> <td>4</td> <td>0</td> <td>27.0</td> <td>0.06</td> <td>0.05</td> <td>0.05</td> <td>20.5</td>
                                 </tr>
                             </table>
-                        <h3>Resource utilization for sendData</h3>
+                        <h3>Resource utilization for createPatientData</h3>
             </div>
 
             <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;">
@@ -187,7 +187,7 @@ clients:
 workers:
   number: 1
 rounds:
-  - label: sendData
+  - label: createPatientData
     description: Sending transactions to the Ethereum network
     txNumber: 2
     rateControl:
@@ -195,111 +195,172 @@ rounds:
       opts:
         tps: 10
     workload:
-      module: .&#x2F;workload&#x2F;newWorkload.js
+      module: .&#x2F;workload&#x2F;samplePatientDataWorkload.js
       arguments:
-        contractId: BenchmarkTest
+        contractId: SampleDataCR
+        senderAddress: &#39;0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1&#39;
         abi:
           - anonymous: false
             inputs:
               - indexed: true
-                internalType: address
-                name: from
-                type: address
-              - indexed: false
-                internalType: &#39;address[]&#39;
-                name: recipients
-                type: &#39;address[]&#39;
-            name: BatchDataSent
-            type: event
-          - anonymous: false
-            inputs:
-              - indexed: true
-                internalType: address
-                name: from
-                type: address
-              - indexed: true
-                internalType: address
-                name: to
-                type: address
-              - indexed: false
                 internalType: uint256
-                name: id
+                name: patientId
                 type: uint256
-              - indexed: false
-                internalType: string
-                name: message
-                type: string
-            name: DataSent
+              - components:
+                  - internalType: uint256
+                    name: id
+                    type: uint256
+                  - internalType: string
+                    name: cns
+                    type: string
+                  - internalType: string
+                    name: nome
+                    type: string
+                  - internalType: string
+                    name: email
+                    type: string
+                  - internalType: string
+                    name: endereco
+                    type: string
+                  - internalType: uint256
+                    name: idade
+                    type: uint256
+                  - internalType: string
+                    name: telefone
+                    type: string
+                  - internalType: string
+                    name: observacoes
+                    type: string
+                  - internalType: string
+                    name: unidade_saude
+                    type: string
+                  - internalType: string
+                    name: uf
+                    type: string
+                  - internalType: string
+                    name: cpf
+                    type: string
+                  - internalType: string
+                    name: data_nascimento
+                    type: string
+                  - internalType: string
+                    name: sexo
+                    type: string
+                  - internalType: string
+                    name: tipo_operacao
+                    type: string
+                indexed: false
+                internalType: struct SampleDataCR.PatientData
+                name: p_data
+                type: tuple
+            name: PatientDataCreated
             type: event
           - inputs:
-              - internalType: address
-                name: &#39;&#39;
-                type: address
-            name: receivedData
-            outputs:
-              - internalType: uint256
-                name: id
-                type: uint256
-              - internalType: string
-                name: message
-                type: string
-              - internalType: address
-                name: sender
-                type: address
-            stateMutability: view
-            type: function
-            constant: true
-          - inputs:
-              - internalType: address
-                name: _to
-                type: address
-              - internalType: uint256
-                name: _id
-                type: uint256
-              - internalType: string
-                name: _message
-                type: string
-            name: sendData
+              - components:
+                  - internalType: uint256
+                    name: id
+                    type: uint256
+                  - internalType: string
+                    name: cns
+                    type: string
+                  - internalType: string
+                    name: nome
+                    type: string
+                  - internalType: string
+                    name: email
+                    type: string
+                  - internalType: string
+                    name: endereco
+                    type: string
+                  - internalType: uint256
+                    name: idade
+                    type: uint256
+                  - internalType: string
+                    name: telefone
+                    type: string
+                  - internalType: string
+                    name: observacoes
+                    type: string
+                  - internalType: string
+                    name: unidade_saude
+                    type: string
+                  - internalType: string
+                    name: uf
+                    type: string
+                  - internalType: string
+                    name: cpf
+                    type: string
+                  - internalType: string
+                    name: data_nascimento
+                    type: string
+                  - internalType: string
+                    name: sexo
+                    type: string
+                  - internalType: string
+                    name: tipo_operacao
+                    type: string
+                internalType: struct SampleDataCR.PatientData
+                name: p_data
+                type: tuple
+            name: createPatientData
             outputs: []
             stateMutability: nonpayable
             type: function
           - inputs:
-              - internalType: &#39;address[]&#39;
-                name: _recipients
-                type: &#39;address[]&#39;
-              - internalType: &#39;uint256[]&#39;
-                name: _ids
-                type: &#39;uint256[]&#39;
-              - internalType: &#39;string[]&#39;
-                name: _messages
-                type: &#39;string[]&#39;
-            name: sendBatchData
-            outputs: []
-            stateMutability: nonpayable
-            type: function
-          - inputs:
-              - internalType: address
-                name: _owner
-                type: address
-            name: getData
+              - internalType: uint256
+                name: patientId
+                type: uint256
+            name: getPatientData
             outputs:
               - components:
                   - internalType: uint256
                     name: id
                     type: uint256
                   - internalType: string
-                    name: message
+                    name: cns
                     type: string
-                  - internalType: address
-                    name: sender
-                    type: address
-                internalType: struct BenchmarkTest.Data
+                  - internalType: string
+                    name: nome
+                    type: string
+                  - internalType: string
+                    name: email
+                    type: string
+                  - internalType: string
+                    name: endereco
+                    type: string
+                  - internalType: uint256
+                    name: idade
+                    type: uint256
+                  - internalType: string
+                    name: telefone
+                    type: string
+                  - internalType: string
+                    name: observacoes
+                    type: string
+                  - internalType: string
+                    name: unidade_saude
+                    type: string
+                  - internalType: string
+                    name: uf
+                    type: string
+                  - internalType: string
+                    name: cpf
+                    type: string
+                  - internalType: string
+                    name: data_nascimento
+                    type: string
+                  - internalType: string
+                    name: sexo
+                    type: string
+                  - internalType: string
+                    name: tipo_operacao
+                    type: string
+                internalType: struct SampleDataCR.PatientData
                 name: &#39;&#39;
                 type: tuple
             stateMutability: view
             type: function
             constant: true
-        senderAddress: &#39;0x0Ff4925570ce4Dd74D20d8C04685AE86c058275a&#39;
 </pre>
                 <h3>SUT</h3>
                 <pre id="sutdetails">not provided</pre>

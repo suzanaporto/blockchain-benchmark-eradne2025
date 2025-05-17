@@ -34,5 +34,8 @@ This repo contains a simple benchmark for two blockchain networks (Ganache and H
  5. Create a js migration file in ```migrations``` folder
  6. Modify ```truffle-config.js```. Uncomment development and add gas parameter
  7. Start Ganache network and migrate your contract
+    ```bash
+    ganache --gasLimit 8500000 --deterministic
+    ```
 
 ## How to run

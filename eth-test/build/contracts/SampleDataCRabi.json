@@ -1,0 +1,271 @@
+
+  [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "patientId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "cns",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nome",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "email",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "endereco",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "idade",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "telefone",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "observacoes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "unidade_saude",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "uf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cpf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "data_nascimento",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "sexo",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "tipo_operacao",
+              "type": "string"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct SampleDataCR.PatientData",
+          "name": "p_data",
+          "type": "tuple"
+        }
+      ],
+      "name": "PatientDataCreated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "cns",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nome",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "email",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "endereco",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "idade",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "telefone",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "observacoes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "unidade_saude",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "uf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cpf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "data_nascimento",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "sexo",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "tipo_operacao",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct SampleDataCR.PatientData",
+          "name": "p_data",
+          "type": "tuple"
+        }
+      ],
+      "name": "createPatientData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "patientId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPatientData",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "cns",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "nome",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "email",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "endereco",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "idade",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "telefone",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "observacoes",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "unidade_saude",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "uf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "cpf",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "data_nascimento",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "sexo",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "tipo_operacao",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct SampleDataCR.PatientData",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }
+  ]
