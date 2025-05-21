@@ -3,26 +3,37 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "loc",
+				"name": "patientHash",
+				"type": "string"
+			}
+		],
+		"name": "retrieve",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "patientHash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "permalink",
 				"type": "string"
 			}
 		],
 		"name": "store",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "retrieve",
-		"outputs": [
-			{
-				"internalType": "bytes32",
-				"name": "",
-				"type": "bytes32"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	}
 ]

@@ -63,12 +63,12 @@ async function initBlockchain() {
     return storageContract, web3;
 }
 
-async function storeData(web3, storageContract, permalink) {
+async function storeData(web3, storageContract, permalink, hashUser) {
     console.log(storageContract);
     console.log(web3);
 
 
-    const method_abi = storageContract.methods.store(permalink).encodeABI();
+    const method_abi = storageContract.methods.store(hashUser, permalink).encodeABI();
     const tx = {
         from: account.address,
         to: contractAddress,
@@ -116,7 +116,7 @@ async function main() {
         console.log(result);
 
         if (result) {
-            await storeData(web3, storage, result.permalink);
+            await storeData(web3, storage, result.permalink, hash);
             console.log('transação realizada');
         }
     }
