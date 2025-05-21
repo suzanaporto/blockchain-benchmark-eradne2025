@@ -3,4 +3,5 @@ __pycache__
 *env
 dados_teste.txt
 data_*.json
+package-lock.json
 ganache_data

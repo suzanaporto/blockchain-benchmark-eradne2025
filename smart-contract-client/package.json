@@ -1,0 +1,20 @@
+{
+  "name": "smart-contract-client",
+  "version": "1.0.0",
+  "main": "client-experiment.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "module": "^1.2.5",
+    "axios": "^1.9.0",
+    "form-data": "^4.0.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "web3": "^4.2.2"
+  }
+}
