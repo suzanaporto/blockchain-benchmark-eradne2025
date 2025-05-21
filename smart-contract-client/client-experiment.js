@@ -5,8 +5,8 @@ import axios from 'axios';
 import Web3 from 'web3';
 import contractAbi from './contract.abi.json' assert {type: "json"}
 
-const contractAddress = "0x567BDf78188009AF391f8783a147ed612ce6212b";
-const accountAddress = "0x13d8Eb68F7fAc4768c0Cb0Fb81d554fA8614EBdb";
+const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
+const accountAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
 const privateKey = "3a94c5f2a379e6c47f86fecdfa82c9ff26997cc338d6b90373a2934901c99875";
 const infuraHost = "https://sepolia.infura.io/v3/0e8a3f90e08e40e2bfc900bab71aea16";
 // const infuraHost = "https://eth-mainnet.g.alchemy.com/v2/QnBVQjRWt3gaPx9_5T9Id_Z6Uomzl59G";
