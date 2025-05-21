@@ -1,0 +1,16 @@
+version: '3'
+services:
+  ganache:
+    image: trufflesuite/ganache
+    container_name: ganache
+    ports:
+      - "8545:8545"
+    command:
+      - --mnemonic="myth like bonus scare over problem client lizard pioneer submit female collect"
+      - --gasLimit=8500000
+      - --accounts=10
+      - --db=/data/ganache-data  # Optional: persist state between restarts
+    volumes:
+      - ganache_data:/data
+volumes:
+  ganache_data:

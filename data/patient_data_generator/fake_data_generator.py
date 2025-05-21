@@ -9,7 +9,7 @@ fake = Faker('pt_BR')
 fake.add_provider(uf_provider)
 fake.add_provider(sexo_provider)
 
-gen_number = 2
+gen_number = 50
 
 def generate_mock_data(num_records=gen_number):
     i = 0

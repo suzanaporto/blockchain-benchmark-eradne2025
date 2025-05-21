@@ -24,9 +24,25 @@ test:
           senderAddress: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
           abi: [{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"patientId","type":"uint256"},{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"cns","type":"string"},{"internalType":"string","name":"nome","type":"string"},{"internalType":"string","name":"email","type":"string"},{"internalType":"string","name":"endereco","type":"string"},{"internalType":"uint256","name":"idade","type":"uint256"},{"internalType":"string","name":"telefone","type":"string"},{"internalType":"string","name":"observacoes","type":"string"},{"internalType":"string","name":"unidade_saude","type":"string"},{"internalType":"string","name":"uf","type":"string"},{"internalType":"string","name":"cpf","type":"string"},{"internalType":"string","name":"data_nascimento","type":"string"},{"internalType":"string","name":"sexo","type":"string"},{"internalType":"string","name":"tipo_operacao","type":"string"}],"indexed":false,"internalType":"struct SampleDataCR.PatientData","name":"p_data","type":"tuple"}],"name":"PatientDataCreated","type":"event"},{"inputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"cns","type":"string"},{"internalType":"string","name":"nome","type":"string"},{"internalType":"string","name":"email","type":"string"},{"internalType":"string","name":"endereco","type":"string"},{"internalType":"uint256","name":"idade","type":"uint256"},{"internalType":"string","name":"telefone","type":"string"},{"internalType":"string","name":"observacoes","type":"string"},{"internalType":"string","name":"unidade_saude","type":"string"},{"internalType":"string","name":"uf","type":"string"},{"internalType":"string","name":"cpf","type":"string"},{"internalType":"string","name":"data_nascimento","type":"string"},{"internalType":"string","name":"sexo","type":"string"},{"internalType":"string","name":"tipo_operacao","type":"string"}],"internalType":"struct SampleDataCR.PatientData","name":"p_data","type":"tuple"}],"name":"createPatientData","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"patientId","type":"uint256"}],"name":"getPatientData","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"cns","type":"string"},{"internalType":"string","name":"nome","type":"string"},{"internalType":"string","name":"email","type":"string"},{"internalType":"string","name":"endereco","type":"string"},{"internalType":"uint256","name":"idade","type":"uint256"},{"internalType":"string","name":"telefone","type":"string"},{"internalType":"string","name":"observacoes","type":"string"},{"internalType":"string","name":"unidade_saude","type":"string"},{"internalType":"string","name":"uf","type":"string"},{"internalType":"string","name":"cpf","type":"string"},{"internalType":"string","name":"data_nascimento","type":"string"},{"internalType":"string","name":"sexo","type":"string"},{"internalType":"string","name":"tipo_operacao","type":"string"}],"internalType":"struct SampleDataCR.PatientData","name":"","type":"tuple"}],"stateMutability":"view","type":"function","constant":true}]
 
-monitor:
-  type:
-    - process
-  interval: 1000
-  process:
-    command: "node /home/suzanaporto/.asdf/installs/nodejs/22.9.0/bin/node /mnt/c/nvm4w/nodejs/node_modules/ganache/dist/node/cli.js"
+monitors:
+  transaction:
+    - module: logging
+      options:
+        loggerModuleName: "txInfo"  # Add this to prevent the earlier error
+        messageLevel: "debug"        # Optional: info, debug, error, etc.
+  resource:
+    - module: docker
+      options:
+        interval: 3
+        containers: 
+          - "/ganache"
+        docker:
+          socketPath: "/var/run/docker.sock"
+    # - module: process
+    #   options:
+    #     interval: 1
+    #     processes: [{ command: '/home/suzanaporto/.asdf/installs/nodejs/22.9.0/bin/node', arguments: '/mnt/c/nvm4w/nodejs/node_modules/ganache/dist/node/cli.js', multiOutput: 'all' }]
+    #     metrics:
+    #       - "percent_cpu"
+    #       - "memory_percent"  # Alternative memory metric
+        # processes: [{ command: '/home/suzanaporto/.asdf/installs/nodejs/22.9.0/bin/node', arguments: '/mnt/c/nvm4w/nodejs/node_modules/@hyperledger/caliper-cli/caliper.js', multiOutput: 'avg' }]
