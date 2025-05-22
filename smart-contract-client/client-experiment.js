@@ -27,26 +27,26 @@ const CREDENTIALS = {
 
 
 async function uploadImage(filePath) {
-    const form = new FormData();
-    form.append('file', fs.createReadStream(filePath));
+  const form = new FormData();
+  form.append('file', fs.createReadStream(filePath));
 
-    try {
-        const response = await axios.post(
-            'https://upload.api.trilogo.app/upload',
-            form,
-            {
-                headers: {
-                    ...form.getHeaders(),
-                    Authorization: `Bearer ${JWT_TOKEN}`,
-                },
-            }
-        );
+  try {
+    const response = await axios.post(
+      'https://upload.api.trilogo.app/upload',
+      form,
+      {
+        headers: {
+          ...form.getHeaders(),
+          Authorization: `Bearer ${JWT_TOKEN}`,
+        },
+      }
+    );
 
-        return response.data; // espera-se que retorne { filename, permalink }
-    } catch (error) {
-        console.error(`Erro ao enviar ${filePath}:`, error.response?.data || error.message);
-        return null;
-    }
+    return response.data; // espera-se que retorne { filename, permalink }
+  } catch (error) {
+    console.error(`Erro ao enviar ${filePath}:`, error.response?.data || error.message);
+    return null;
+  }
 }
 
 async function authenticateAndGetJWT() {
@@ -75,74 +75,82 @@ async function generateIdentificationHash() {
 }
 
 async function initBlockchain() {
-    const web3 = new Web3(new Web3.providers.HttpProvider(infuraHost));
-    // const account = web3.eth.accounts.privateKeyToAccount('0x' + privateKey);
-    // const wallet = web3.eth.accounts.wallet.add(account);
-    let account2 = await web3.eth.getAccounts();
-    console.log(account2);
-    let storageContract = new web3.eth.Contract(contractAbi, contractAddress);
-    return [storageContract, web3];
+  const web3 = new Web3(new Web3.providers.HttpProvider(infuraHost));
+  const account = web3.eth.accounts.privateKeyToAccount('0x' + privateKey);
+  // const wallet = web3.eth.accounts.wallet.add(account);
+  // let account2 = await web3.eth.getAccounts();
+  // console.log(account2);
+  let storageContract = new web3.eth.Contract(contractAbi, contractAddress);
+  return [storageContract, web3, account];
 }
 
-async function storeData(web3, storageContract, permalink, hashUser) {
-    console.log(storageContract);
-    console.log(web3);
+async function storeData(web3, storageContract, account, permalink, patientHash, increase) {
+  // console.log(storageContract);
+  // console.log(web3);
+  let price = 1;
+  const value = Web3.utils.toWei(price.toString(), 'ether');
 
 
-    const method_abi = storageContract.methods.store(hashUser, permalink).encodeABI();
-    const tx = {
-        from: account.address,
-        to: contractAddress,
-        data: method_abi,
-        value: '0',
-        gasPrice: (264417514649 * (increase || 1)).toString(),
-        // maxFeePerGas: '371316469291',
-    };
-    console.log(tx);
-    const gas_estimate = await web3.eth.estimateGas(tx);
-    tx.gas = gas_estimate;
+  const method_abi = storageContract.methods.store(patientHash, permalink).encodeABI();
+  const tx = {
+    from: account.address,
+    to: contractAddress,
+    data: method_abi,
+    value: '0',
+    gasPrice: Web3.utils.toHex(264417514649).toString(),
+    // maxFeePerGas: '371316469291',
+  };
+  console.log(tx);
+  const gas_estimate = await web3.eth.estimateGas(tx);
+  tx.gas = gas_estimate;
 
-    const signedTx = await web3.eth.accounts.signTransaction(
-        tx, account.privateKey
-    );
-    console.log("Raw transaction data: " + (signedTx).rawTransaction);
-    // Sending the transaction to the network
-    const receipt = await web3.eth
-        .sendSignedTransaction(signedTx.rawTransaction)
-        .once("transactionHash", (txhash) => {
-            console.log(`Mining transaction ...`);
-            console.log(`https://sepolia.etherscan.io/tx/${txhash}`);
-        });
-    // The transaction is now on chain!
-    console.log(`Mined in block ${receipt.blockNumber}`);
+  const signedTx = await web3.eth.accounts.signTransaction(
+    tx, account.privateKey
+  );
+  console.log("Raw transaction data: " + (signedTx).rawTransaction);
+  // Sending the transaction to the network
+  const receipt = await web3.eth
+    .sendSignedTransaction(signedTx.rawTransaction)
+    .once("transactionHash", (txhash) => {
+      console.log(`Mining transaction ...`);
+      console.log(`https://sepolia.etherscan.io/tx/${txhash}`);
+    });
+  // The transaction is now on chain!
+  console.log(`Mined in block ${receipt.blockNumber}`);
 }
 
 
 async function main() {
-    JWT_TOKEN = await authenticateAndGetJWT();
+  JWT_TOKEN = await authenticateAndGetJWT();
 
-    let [storage, web3] = await initBlockchain();
+  let [storage, web3, account] = await initBlockchain();
 
-    const hash = await generateIdentificationHash();
+  const hash = await generateIdentificationHash();
+  console.log(hash);
 
-    const files = fs.readdirSync(datasetDir).filter(file => {
-        const ext = path.extname(file).toLowerCase();
-        return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
-    });
+  const files = fs.readdirSync(datasetDir).filter(file => {
+    const ext = path.extname(file).toLowerCase();
+    return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
+  });
 
+  try {
     for (const file of files) {
-        const filePath = path.join(datasetDir, file);
-        console.log(`🔄 Enviando ${file}...`);
+      const filePath = path.join(datasetDir, file);
+      console.log(`🔄 Enviando ${file}...`);
 
-        const [result] = await uploadImage(filePath);
-        console.log('Arquivo enviado');
-        console.log(result);
+      const [result] = await uploadImage(filePath);
+      console.log('Arquivo enviado');
+      console.log(result);
 
-        if (result) {
-            await storeData(web3, storage, result.permalink, hash);
-            console.log('transação realizada');
-        }
+      if (result) {
+        await storeData(web3, storage, account, result.permalink, hash.toString(), 0.8);
+        console.log('transação realizada');
+      }
     }
+  }
+  catch (error) {
+    console.error(error);
+  }
 
 }
 
