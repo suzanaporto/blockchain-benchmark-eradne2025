@@ -1,8 +1,8 @@
 // var MyContract = artifacts.require("BenchmarkTest");
-var SampleData = artifacts.require("SampleDataCR");
+var StorePatientData = artifacts.require("PatientImageStorage");
 
 module.exports = function(deployer) {
   // deployment steps
   // deployer.deploy(MyContract);
-  deployer.deploy(SampleData);
+  deployer.deploy(StorePatientData);
 };

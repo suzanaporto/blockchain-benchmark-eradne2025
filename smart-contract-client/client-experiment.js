@@ -3,13 +3,18 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import Web3 from 'web3';
-import contractAbi from './contract.abi.json' with {type: "json"}
+// import contractAbi from './contract.abi.json' with {type: "json"}
+import contractAbi from './patientImageStorage_abi.json' with {type: "json"}
 
-const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
-const accountAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
-const privateKey = "3a94c5f2a379e6c47f86fecdfa82c9ff26997cc338d6b90373a2934901c99875";
-const infuraHost = "https://sepolia.infura.io/v3/0e8a3f90e08e40e2bfc900bab71aea16";
+// const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
+// const accountAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
+// const infuraHost = "https://sepolia.infura.io/v3/0e8a3f90e08e40e2bfc900bab71aea16";
 // const infuraHost = "https://eth-mainnet.g.alchemy.com/v2/QnBVQjRWt3gaPx9_5T9Id_Z6Uomzl59G";
+// const privateKey = "3a94c5f2a379e6c47f86fecdfa82c9ff26997cc338d6b90373a2934901c99875";
+const ganacheHost = "http://127.0.0.1:8545";
+const contractAddress =  "0x1932400a9a132d20c3961e2848de4ba3ce8ff30b"
+const accountAddress = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
+const privateKey = "4f3edf983ac636a65a842ce7c78d9aa706d3b113bce9c46f30d7d21715b23b1d";
 
 
 const loginCredentials = {
@@ -75,7 +80,7 @@ async function generateIdentificationHash() {
 }
 
 async function initBlockchain() {
-  const web3 = new Web3(new Web3.providers.HttpProvider(infuraHost));
+  const web3 = new Web3(new Web3.providers.HttpProvider(ganacheHost));
   const account = web3.eth.accounts.privateKeyToAccount('0x' + privateKey);
   // const wallet = web3.eth.accounts.wallet.add(account);
   // let account2 = await web3.eth.getAccounts();
@@ -113,7 +118,7 @@ async function storeData(web3, storageContract, account, permalink, patientHash,
     .sendSignedTransaction(signedTx.rawTransaction)
     .once("transactionHash", (txhash) => {
       console.log(`Mining transaction ...`);
-      console.log(`https://sepolia.etherscan.io/tx/${txhash}`);
+      console.log(`TXHASH value: ${txhash}`);
     });
   // The transaction is now on chain!
   console.log(`Mined in block ${receipt.blockNumber}`);
