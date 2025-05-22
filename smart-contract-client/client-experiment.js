@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import Web3 from 'web3';
-import contractAbi from './contract.abi.json' assert {type: "json"}
+import contractAbi from './contract.abi.json' with {type: "json"}
 
 const contractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
 const accountAddress = "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4";
@@ -81,7 +81,7 @@ async function initBlockchain() {
     let account2 = await web3.eth.getAccounts();
     console.log(account2);
     let storageContract = new web3.eth.Contract(contractAbi, contractAddress);
-    return storageContract, web3;
+    return [storageContract, web3];
 }
 
 async function storeData(web3, storageContract, permalink, hashUser) {
@@ -121,7 +121,7 @@ async function storeData(web3, storageContract, permalink, hashUser) {
 async function main() {
     JWT_TOKEN = await authenticateAndGetJWT();
 
-    let storage, web3 = await initBlockchain();
+    let [storage, web3] = await initBlockchain();
 
     const hash = await generateIdentificationHash();
 
@@ -134,7 +134,7 @@ async function main() {
         const filePath = path.join(datasetDir, file);
         console.log(`🔄 Enviando ${file}...`);
 
-        const result = await uploadImage(filePath);
+        const [result] = await uploadImage(filePath);
         console.log('Arquivo enviado');
         console.log(result);
 

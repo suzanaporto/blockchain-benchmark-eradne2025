@@ -5,3 +5,4 @@ dados_teste.txt
 data_*.json
 package-lock.json
 ganache_data
+test-client-experiment.js
