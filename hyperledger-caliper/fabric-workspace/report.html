@@ -126,15 +126,18 @@
             <ul>
                 <h3>&nbspBasic information</h3>
                 <li>DLT: &nbsp<span style="font-weight: 500;">fabric</span></li>
-                <li>Name: &nbsp<span style="font-weight: 500;">FabCar Benchmark Test</span></li>
-                <li>Description: &nbsp<span style="font-weight: 500;">Caliper benchmark for Hyperledger Fabric FabCar example</span></li>
-                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">2</span></li>
+                <li>Name: &nbsp<span style="font-weight: 500;">ERAD NE 2025 - Load testing (Fabric)</span></li>
+                <li>Description: &nbsp<span style="font-weight: 500;">Measuring transaction throughput and latency with progressive loads</span></li>
+                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">4</span></li>
                 <li><a href="#benchmarkInfo">Details</a></li>
             </ul>
             <ul>
                 <h3>&nbspBenchmark results</h3>
                 <li><a href="#benchmarksummary">Summary</a></li>
-                    <li><a href="#query">query</a></li>
+                    <li><a href="#store function round1-tx-test-50">store function round1-tx-test-50</a></li>
+                    <li><a href="#store function round2-tx-test-100">store function round2-tx-test-100</a></li>
+                    <li><a href="#store function round1-duration-test-60">store function round1-duration-test-60</a></li>
+                    <li><a href="#store function round2-duration-test-60">store function round2-duration-test-60</a></li>
             </ul>
             <ul>
                 <h3>&nbspSystem under test</h3>
@@ -152,66 +155,242 @@
                     </tr>
 
                     <tr>
-                         <td>query</td> <td>2</td> <td>0</td> <td>10.2</td> <td>0.01</td> <td>0.01</td> <td>0.01</td> <td>9.8</td>
+                         <td>store function round1-tx-test-50</td> <td>50</td> <td>0</td> <td>10.2</td> <td>0.96</td> <td>0.04</td> <td>0.50</td> <td>10.1</td>
+                    </tr>
+                    <tr>
+                         <td>store function round2-tx-test-100</td> <td>100</td> <td>0</td> <td>10.1</td> <td>0.96</td> <td>0.04</td> <td>0.50</td> <td>10.0</td>
+                    </tr>
+                    <tr>
+                         <td>store function round1-duration-test-60</td> <td>4292</td> <td>0</td> <td>71.7</td> <td>2.03</td> <td>0.03</td> <td>0.07</td> <td>69.5</td>
+                    </tr>
+                    <tr>
+                         <td>store function round2-duration-test-60</td> <td>9002</td> <td>0</td> <td>150.5</td> <td>2.10</td> <td>0.03</td> <td>0.06</td> <td>145.5</td>
                     </tr>
                 </table>
             </div>
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="query">
-                <h2>Benchmark round: query</h2>
-                <p>Query all cars</p>
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="store function round1-tx-test-50">
+                <h2>Benchmark round: store function round1-tx-test-50</h2>
+                <p>store function r1-tx-fixed-rate_10</p>
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: fixed-rate
   opts:
-    tps: 5
+    tps: 10
 </pre>
-                        <h3>Performance metrics for query</h3>
+                        <h3>Performance metrics for store function round1-tx-test-50</h3>
                             <table style="min-width: 100%;">
                                 <tr>
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>query</td> <td>2</td> <td>0</td> <td>10.2</td> <td>0.01</td> <td>0.01</td> <td>0.01</td> <td>9.8</td>
+                                     <td>store function round1-tx-test-50</td> <td>50</td> <td>0</td> <td>10.2</td> <td>0.96</td> <td>0.04</td> <td>0.50</td> <td>10.1</td>
                                 </tr>
                             </table>
-                        <h3>Resource utilization for query</h3>
+                        <h3>Resource utilization for store function round1-tx-test-50</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [KB]</th> <th>Traffic Out [KB]</th> <th>Disc Write [B]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>1.71</td> <td>0.6</td> <td>22.7</td> <td>22.5</td> <td>275</td> <td>530</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>10.22</td> <td>5.37</td> <td>39.3</td> <td>39.3</td> <td>416</td> <td>274</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>9.97</td> <td>5.32</td> <td>43.4</td> <td>43.3</td> <td>411</td> <td>247</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="store function round2-tx-test-100">
+                <h2>Benchmark round: store function round2-tx-test-100</h2>
+                <p>store function r2-tx-fixed-rate_10</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 10
+</pre>
+                        <h3>Performance metrics for store function round2-tx-test-100</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>store function round2-tx-test-100</td> <td>100</td> <td>0</td> <td>10.1</td> <td>0.96</td> <td>0.04</td> <td>0.50</td> <td>10.0</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for store function round2-tx-test-100</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [KB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [B]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>1.66</td> <td>0.96</td> <td>23.0</td> <td>22.7</td> <td>545</td> <td>1.02</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>8.25</td> <td>5.83</td> <td>39.8</td> <td>39.6</td> <td>811</td> <td>0.479</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>8.71</td> <td>5.71</td> <td>43.7</td> <td>43.5</td> <td>800</td> <td>0.451</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="store function round1-duration-test-60">
+                <h2>Benchmark round: store function round1-duration-test-60</h2>
+                <p>store function duration-fixed-10</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">txDuration: 60
+rateControl:
+  type: fixed-load
+  opts:
+    transactionLoad: 10
+</pre>
+                        <h3>Performance metrics for store function round1-duration-test-60</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>store function round1-duration-test-60</td> <td>4292</td> <td>0</td> <td>71.7</td> <td>2.03</td> <td>0.03</td> <td>0.07</td> <td>69.5</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for store function round1-duration-test-60</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [B]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>24.18</td> <td>10.5</td> <td>47.1</td> <td>36.0</td> <td>22.0</td> <td>43.6</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>31.59</td> <td>22.71</td> <td>40.7</td> <td>40.1</td> <td>32.2</td> <td>17.4</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>32.34</td> <td>22.56</td> <td>44.9</td> <td>43.9</td> <td>32.2</td> <td>17.0</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="store function round2-duration-test-60">
+                <h2>Benchmark round: store function round2-duration-test-60</h2>
+                <p>store function duration-fixed-20</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">txDuration: 60
+rateControl:
+  type: fixed-load
+  opts:
+    transactionLoad: 20
+</pre>
+                        <h3>Performance metrics for store function round2-duration-test-60</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>store function round2-duration-test-60</td> <td>9002</td> <td>0</td> <td>150.5</td> <td>2.10</td> <td>0.03</td> <td>0.06</td> <td>145.5</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for store function round2-duration-test-60</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [B]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>36.41</td> <td>20.47</td> <td>87.8</td> <td>65.6</td> <td>45.6</td> <td>91.1</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>56.86</td> <td>39.78</td> <td>50.6</td> <td>45.3</td> <td>66.2</td> <td>35.2</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>56.37</td> <td>39.42</td> <td>48.0</td> <td>46.2</td> <td>66.2</td> <td>34.5</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
             </div>
 
             <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;">
                 <h2>Test Environment</h2>
                 <h3>benchmark config</h3>
-                <pre id="benchmarkInfo" style="overflow: visible;white-space: pre-wrap;max-height:100%;">name: FabCar Benchmark Test
-description: Caliper benchmark for Hyperledger Fabric FabCar example
+                <pre id="benchmarkInfo" style="overflow: visible;white-space: pre-wrap;max-height:100%;">name: ERAD NE 2025 - Load testing (Fabric)
+description: Measuring transaction throughput and latency with progressive loads
 workers:
   type: local
   number: 1
 rounds:
-  - label: query
-    description: Query all cars
-    txNumber: 2
+  - label: store function round1-tx-test-50
+    description: store function r1-tx-fixed-rate_10
+    txNumber: 50
     rateControl:
       type: fixed-rate
       opts:
-        tps: 5
+        tps: 10
     workload:
-      module: workloads&#x2F;queryAllCars.js
+      module: workloads&#x2F;patientImageWorkload.js
       arguments:
-        contractId: fabcar
+        contractId: patient_4.0
         channel: mychannel
-  - label: create
-    description: Create a car
-    txDuration: 30
+  - label: store function round2-tx-test-100
+    description: store function r2-tx-fixed-rate_10
+    txNumber: 100
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 10
+    workload:
+      module: workloads&#x2F;patientImageWorkload.js
+      arguments:
+        contractId: patient_4.0
+        channel: mychannel
+  - label: store function round1-duration-test-60
+    description: store function duration-fixed-10
+    txDuration: 60
     rateControl:
       type: fixed-load
       opts:
-        tps: 5
+        transactionLoad: 10
     workload:
-      module: workloads&#x2F;createCar.js
+      module: workloads&#x2F;patientImageWorkload.js
       arguments:
-        contractId: fabcar
+        contractId: patient_4.0
         channel: mychannel
-monitors:
-  transaction:
-    - module: logging
+  - label: store function round2-duration-test-60
+    description: store function duration-fixed-20
+    txDuration: 60
+    rateControl:
+      type: fixed-load
+      opts:
+        transactionLoad: 20
+    workload:
+      module: workloads&#x2F;patientImageWorkload.js
+      arguments:
+        contractId: patient_4.0
+        channel: mychannel
 </pre>
                 <h3>SUT</h3>
                 <pre id="sutdetails">not provided</pre>

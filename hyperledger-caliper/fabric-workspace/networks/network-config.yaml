@@ -1,11 +1,15 @@
 version: "2.0.0"
 caliper:
   blockchain: fabric
+  gateway:
+    enabled: true
+    discover: true
 
 channels:
   - channelName: mychannel
     contracts:
-      - id: fabcar
+      - id: patient
+        version: '4.0'
     organizations:
       - Org1
       - Org2
@@ -17,7 +21,7 @@ organizations:
       - name: Admin
         admin: true
         clientPrivateKey:
-          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/409b6e62ef1186ae59b17ccd51f988c0b063ef4ba5a7f8c182f409ecbdb65cf5_sk
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/aa1e4ce18606839a45997c81fe67c740ea0833d991b25bce4dd17c3d3adc5a06_sk
         clientSignedCert:
           path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
     connectionProfile:
@@ -31,7 +35,7 @@ organizations:
       - name: Admin
         admin: true
         clientPrivateKey:
-          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/e81ee54f5a77427482defdc47fafd4a8bc2cac8dd0736a6ee9bdb61c8fe423ef_sk
+          path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/8dddc05897fba410f18146a2704323ab0362b520f121de481808bf651034d3c6_sk
         clientSignedCert:
           path: ../../../../hyperledger3/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
     connectionProfile:

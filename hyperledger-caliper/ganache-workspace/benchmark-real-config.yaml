@@ -1,0 +1,91 @@
+test:
+  name: ERAD NE 2025 - Load testing (Ganache)
+  description: Measuring transaction throughput and latency with progressive loads
+
+  clients:
+    type: local
+    number: 1
+
+  workers:
+    number: 1
+
+  rounds:
+
+    - label: "store function round1-tx-test-50"
+      description: store function r1-tx-fixed-rate_10
+      txNumber: 50
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: ./workload/patientImageWorkload.js
+        arguments:
+          contractId: "PatientImageStorage"
+          senderAddress: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+          abi: [{"inputs":[{"internalType":"string","name":"patientHash","type":"string"},{"internalType":"string","name":"permalink","type":"string"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"patientHash","type":"string"}],"name":"retrieve","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]
+    
+    - label: "store function round2-tx-test-100"
+      description: store function r2-tx-fixed-rate_10
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: ./workload/patientImageWorkload.js
+        arguments:
+          contractId: "PatientImageStorage"
+          senderAddress: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+          abi: [{"inputs":[{"internalType":"string","name":"patientHash","type":"string"},{"internalType":"string","name":"permalink","type":"string"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"patientHash","type":"string"}],"name":"retrieve","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]
+    
+    - label: "store function round1-duration-test-60"
+      description: store function duration-fixed-10
+      txDuration: 60
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 10
+      workload:
+        module: ./workload/patientImageWorkload.js
+        arguments:
+          contractId: "PatientImageStorage"
+          senderAddress: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+          abi: [{"inputs":[{"internalType":"string","name":"patientHash","type":"string"},{"internalType":"string","name":"permalink","type":"string"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"patientHash","type":"string"}],"name":"retrieve","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]
+    
+    - label: "store function round2-duration-test-60"
+      description: store function duration-fixed-20
+      txDuration: 60
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 20
+      workload:
+        module: ./workload/patientImageWorkload.js
+        arguments:
+          contractId: "PatientImageStorage"
+          senderAddress: "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1"
+          abi: [{"inputs":[{"internalType":"string","name":"patientHash","type":"string"},{"internalType":"string","name":"permalink","type":"string"}],"name":"store","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"patientHash","type":"string"}],"name":"retrieve","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function","constant":true}]
+
+monitors:
+  transaction:
+    - module: logging
+      options:
+        loggerModuleName: "txInfo"  # Add this to prevent the earlier error
+        messageLevel: "debug"        # Optional: info, debug, error, etc.
+  resource:
+    - module: docker
+      options:
+        interval: 3
+        containers: 
+          - "/ganache"
+        docker:
+          socketPath: "/var/run/docker.sock"
+    # - module: process
+    #   options:
+    #     interval: 1
+    #     processes: [{ command: '/home/suzanaporto/.asdf/installs/nodejs/22.9.0/bin/node', arguments: '/mnt/c/nvm4w/nodejs/node_modules/ganache/dist/node/cli.js', multiOutput: 'all' }]
+    #     metrics:
+    #       - "percent_cpu"
+    #       - "memory_percent"  # Alternative memory metric
+        # processes: [{ command: '/home/suzanaporto/.asdf/installs/nodejs/22.9.0/bin/node', arguments: '/mnt/c/nvm4w/nodejs/node_modules/@hyperledger/caliper-cli/caliper.js', multiOutput: 'avg' }]

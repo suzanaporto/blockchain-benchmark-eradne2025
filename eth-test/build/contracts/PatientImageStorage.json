@@ -6772,10 +6772,16 @@
       "links": {},
       "address": "0x1932400a9A132D20c3961E2848DE4bA3Ce8Ff30B",
       "transactionHash": "0x2e974462ac68ac34211222b3a09482f0dd1d34fbcd9be65b4988a1ff5b8c4e3c"
+    },
+    "1747954765081": {
+      "events": {},
+      "links": {},
+      "address": "0x8f6Ec2eca7FB7B15df480d1266Ba142aEbfd373D",
+      "transactionHash": "0x658f45c029e9fb49d190be30a81315c885ccec4e7eead02634a40f6dfe16fc8d"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2025-05-22T13:44:23.467Z",
+  "updatedAt": "2025-05-22T23:00:00.401Z",
   "networkType": "ethereum",
   "devdoc": {
     "custom:dev-run-script": "./scripts/deploy_with_ethers.ts",

@@ -1,22 +1,61 @@
 test:
-  name: FabCar Benchmark Test
-  description: Caliper benchmark for Hyperledger Fabric FabCar example
+  name: ERAD NE 2025 - Load testing (Fabric)
+  description: Measuring transaction throughput and latency with progressive loads
   workers:
     type: local
     number: 1
 
   rounds:
-    - label: query
-      description: Query all cars
-      txNumber: 2
+    - label: "store function round1-tx-test-50"
+      description: store function r1-tx-fixed-rate_10
+      txNumber: 50
       rateControl:
         type: fixed-rate
         opts:
-          tps: 5
+          tps: 10
       workload:
-        module: workloads/queryAllCars.js
+        module: workloads/patientImageWorkload.js
         arguments:
-          contractId: fabcar
+          contractId: patient_4.0
+          channel: mychannel
+
+    - label: "store function round2-tx-test-100"
+      description: store function r2-tx-fixed-rate_10
+      txNumber: 100
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 10
+      workload:
+        module: workloads/patientImageWorkload.js
+        arguments:
+          contractId:  patient_4.0
+          channel: mychannel
+    
+    - label: "store function round1-duration-test-60"
+      description: store function duration-fixed-10
+      txDuration: 60
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 10
+      workload:
+        module: workloads/patientImageWorkload.js
+        arguments:
+          contractId:  patient_4.0
+          channel: mychannel
+  
+    - label: "store function round2-duration-test-60"
+      description: store function duration-fixed-20
+      txDuration: 60
+      rateControl:
+        type: fixed-load
+        opts:
+          transactionLoad: 20
+      workload:
+        module: workloads/patientImageWorkload.js
+        arguments:
+          contractId:  patient_4.0
           channel: mychannel
 
     # - label: create
@@ -32,6 +71,20 @@ test:
     #       contractId: fabcar
     #       channel: mychannel
 
-  monitors:
-      transaction:
-      - module: logging
+monitors:
+  transaction:
+    - module: logging
+      options:
+        loggerModuleName: "txInfo"  # Add this to prevent the earlier error
+        messageLevel: "debug"        # Optional: info, debug, error, etc.
+  resource:
+    - module: docker
+      options:
+        interval: 3
+        containers: 
+          - "/orderer.example.com"
+          - "/peer0.org1.example.com"
+          - "/peer0.org2.example.com"
+          - "/orderer.example.com"
+        docker:
+          socketPath: "/var/run/docker.sock"
